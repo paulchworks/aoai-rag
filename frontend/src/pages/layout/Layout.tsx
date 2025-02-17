@@ -5,27 +5,27 @@ import { CopyRegular } from '@fluentui/react-icons'
 
 import { CosmosDBStatus } from '../../api'
 import Contoso from '../../assets/Contoso.svg'
-import { HistoryButton, ShareButton } from '../../components/common/Button'
+import { HistoryButton, LogoutButton } from '../../components/common/Button'
 import { AppStateContext } from '../../state/AppProvider'
 
 import styles from './Layout.module.css'
 
 const Layout = () => {
-  const [isSharePanelOpen, setIsSharePanelOpen] = useState<boolean>(false)
+  const [isLogoutPanelOpen, setIsLogoutPanelOpen] = useState<boolean>(false)
   const [copyClicked, setCopyClicked] = useState<boolean>(false)
   const [copyText, setCopyText] = useState<string>('Copy URL')
-  const [shareLabel, setShareLabel] = useState<string | undefined>('Logout')
+  const [LogoutLabel, setLogoutLabel] = useState<string | undefined>('Logout')
   const [hideHistoryLabel, setHideHistoryLabel] = useState<string>('Hide chat history')
   const [showHistoryLabel, setShowHistoryLabel] = useState<string>('Show chat history')
   const [logo, setLogo] = useState('')
   const appStateContext = useContext(AppStateContext)
   const ui = appStateContext?.state.frontendSettings?.ui
-  const handleShareClick = () => {
-    window.location.href = window.location.href + '/.auth/logout';
+  const handleLogoutClick = () => {
+    window.location.href = window.location.href + '/.auth/Logout';
   };
   
-  const handleSharePanelDismiss = () => {
-    setIsSharePanelOpen(false);
+  const handleLogoutPanelDismiss = () => {
+    setIsLogoutPanelOpen(false);
     setCopyClicked(false);
     setCopyText("Copy URL");
   };
@@ -56,11 +56,11 @@ const Layout = () => {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 480) {
-        setShareLabel(undefined)
+        setLogoutLabel('Logout')
         setHideHistoryLabel('Hide history')
         setShowHistoryLabel('Show history')
       } else {
-        setShareLabel('Share')
+        setLogoutLabel('Logout')
         setHideHistoryLabel('Hide chat history')
         setShowHistoryLabel('Show chat history')
       }
@@ -82,21 +82,21 @@ const Layout = () => {
               <h1 className={styles.headerTitle}>{ui?.title}</h1>
             </Link>
           </Stack>
-          <Stack horizontal tokens={{ childrenGap: 4 }} className={styles.shareButtonContainer}>
+          <Stack horizontal tokens={{ childrenGap: 4 }} className={styles.LogoutButtonContainer}>
             {appStateContext?.state.isCosmosDBAvailable?.status !== CosmosDBStatus.NotConfigured && ui?.show_chat_history_button !== false && (
               <HistoryButton
                 onClick={handleHistoryClick}
                 text={appStateContext?.state?.isChatHistoryOpen ? hideHistoryLabel : showHistoryLabel}
               />
             )}
-            {ui?.show_share_button && <ShareButton onClick={handleShareClick} text={shareLabel} />}
+            {ui?.show_Logout_button && <LogoutButton onClick={handleLogoutClick} text={LogoutLabel} />}
           </Stack>
         </Stack>
       </header>
       <Outlet />
       <Dialog
-        onDismiss={handleSharePanelDismiss}
-        hidden={!isSharePanelOpen}
+        onDismiss={handleLogoutPanelDismiss}
+        hidden={!isLogoutPanelOpen}
         styles={{
           main: [
             {
@@ -114,7 +114,7 @@ const Layout = () => {
           ]
         }}
         dialogContentProps={{
-          title: 'Share the web app',
+          title: 'Logout the web app',
           showCloseButton: true
         }}>
         <Stack horizontal verticalAlign="center" style={{ gap: '8px' }}>

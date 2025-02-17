@@ -7,11 +7,11 @@ interface ButtonProps extends IButtonProps {
   text: string | undefined;
 }
 
-export const ShareButton: React.FC<ButtonProps> = ({ onClick, text }) => {
+export const LogoutButton: React.FC<ButtonProps> = ({ onClick, text }) => {
 
   return (
     <CommandBarButton
-      className={styles.shareButtonRoot}
+      className={styles.LogoutButtonRoot}
       iconProps={{ iconName: 'Logout' }}
       onClick={onClick}
       text={text}

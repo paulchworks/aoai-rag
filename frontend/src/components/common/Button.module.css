@@ -1,4 +1,4 @@
-.shareButtonRoot {
+.LogoutButtonRoot {
   width: 86px;
   height: 32px;
   border-radius: 4px;
@@ -6,19 +6,19 @@
   padding: 5px 12px;
 }
 
-.shareButtonRoot:hover {
+.LogoutButtonRoot:hover {
   background: linear-gradient(135deg, #0f6cbd 0%, #2d87c3 51.04%, #8dddd8 100%);
 }
 
-.shareButtonRoot span {
+.LogoutButtonRoot span {
   font-weight: 600;
   font-size: 14px;
   line-height: 20px;
   color: #ffffff;
 }
 
-.shareButtonRoot i,
-.shareButtonRoot:hover i {
+.LogoutButtonRoot i,
+.LogoutButtonRoot:hover i {
   color: #ffffff !important;
 }
 
@@ -36,7 +36,7 @@
 }
 
 @media (max-width: 480px) {
-  .shareButtonRoot {
+  .LogoutButtonRoot {
     width: auto;
     padding: 5px 8px;
   }

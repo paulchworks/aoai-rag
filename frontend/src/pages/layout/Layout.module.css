@@ -37,18 +37,18 @@
   margin-left: 36px;
 }
 
-.shareButtonContainer {
+.LogoutButtonContainer {
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin-right: 20px;
 }
 
-.shareButton {
+.LogoutButton {
   color: #ffffff;
 }
 
-.shareButtonText {
+.LogoutButtonText {
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
