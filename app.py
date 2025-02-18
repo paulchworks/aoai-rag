@@ -1,3 +1,12 @@
+import warnings
+
+# Suppress specific warnings
+warnings.filterwarnings(
+    "ignore",
+    message="A custom validator is returning a value other than `self`.",
+    category=UserWarning
+)
+
 import copy
 import json
 import os
