@@ -26,10 +26,11 @@ from quart import (
 )
 
 from openai import AsyncAzureOpenAI
-from azure.identity.aio import (
-    DefaultAzureCredential,
-    get_bearer_token_provider
-)
+from azure.identity import DefaultAzureCredential
+#from azure.identity.aio import (
+#    DefaultAzureCredential,
+#    get_bearer_token_provider
+#)
 from backend.auth.auth_utils import get_authenticated_user_details
 from backend.security.ms_defender_utils import get_msdefender_user_json
 from backend.history.cosmosdbservice import CosmosConversationClient
