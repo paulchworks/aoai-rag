@@ -1,4 +1,5 @@
-![image](https://github.com/user-attachments/assets/9556abdc-6e3d-4efe-96d7-fc3d3d9f38db)
+![image](https://github.com/user-attachments/assets/e500d34a-3436-4ba2-9b88-6565ce5ecbc2)
+
 
 # Full-Stack Application Setup Script
 
