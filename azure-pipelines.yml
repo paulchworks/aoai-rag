@@ -77,5 +77,5 @@ stages:
         WebAppName: 'ea-paulch'
         packageForLinux: '$(Pipeline.Workspace)/app.zip'
         RuntimeStack: 'PYTHON|3.11'
-        StartupCommand: 'python -m quart run'
+        StartupCommand: 'python -m quart run --port=$PORT --host=0.0.0.0'
 
