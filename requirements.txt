@@ -10,6 +10,7 @@ quart
 uvicorn
 aiohttp
 gunicorn
+pyyaml
 pydantic-settings
 pydantic
 azure-ai-formrecognizer

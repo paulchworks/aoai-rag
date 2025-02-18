@@ -70,6 +70,6 @@ stages:
         WebAppName: 'ea-paulch'
         packageForLinux: '$(Pipeline.Workspace)/app.zip'
         RuntimeStack: 'PYTHON|3.11'
-        StartupCommand: 'python3 -m gunicorn app:app'
+        StartupCommand: 'python -m quart run'
 
 
