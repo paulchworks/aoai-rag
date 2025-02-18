@@ -21,7 +21,7 @@ const Layout = () => {
   const appStateContext = useContext(AppStateContext)
   const ui = appStateContext?.state.frontendSettings?.ui
   const handleLogoutClick = () => {
-    window.location.href = window.location.href + '/.auth/Logout';
+    window.location.href = window.location.href + '/.auth/logout';
   };
   
   const handleLogoutPanelDismiss = () => {
