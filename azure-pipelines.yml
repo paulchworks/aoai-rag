@@ -1,0 +1,75 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+- stage: Build
+  displayName: 'Build Application'
+  jobs:
+  - job: BuildJob
+    displayName: 'Build and Package Application'
+    steps:
+    - script: echo Building the application...
+      displayName: 'Start Build Process'
+
+    - script: |
+        python3 -m venv .venv
+        source .venv/bin/activate
+        pip install -r requirements.txt
+        cd frontend
+        npm install
+        npm build
+      displayName: 'Install Dependencies'
+
+    - script: ls -R .
+      displayName: 'List Working Directory Contents'
+
+    - script: |
+        echo Creating deployment package...
+        zip -r $(Build.ArtifactStagingDirectory)/app.zip app.py requirements.txt static/ frontend/ backend/
+      displayName: 'Package Application'
+
+    - script: unzip -l $(Build.ArtifactStagingDirectory)/app.zip
+      displayName: 'List Contents of Created ZIP File'
+
+    - script: ls -R $(Build.ArtifactStagingDirectory)
+      displayName: 'List Build Artifacts'
+
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Build.ArtifactStagingDirectory)/app.zip'
+        artifact: 'drop'
+        publishLocation: 'pipeline'
+
+- stage: Deploy
+  displayName: 'Deploy Application'
+  dependsOn: Build
+  jobs:
+  - job: DeployJob
+    displayName: 'Deploy to Azure App Service'
+    steps:
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        buildType: 'current'
+        artifactName: 'drop'
+        targetPath: '$(Pipeline.Workspace)'
+
+    - script: ls -R $(Pipeline.Workspace)
+      displayName: 'List Downloaded Artifacts'
+
+    - script: unzip -l $(Pipeline.Workspace)/app.zip
+      displayName: 'List Contents of Downloaded ZIP File'
+
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'Default Subscription (0f21e802-aeff-4e83-977e-a5bde15f65c1)'
+        appType: 'webAppLinux'
+        WebAppName: 'ea-paulch'
+        packageForLinux: '$(Pipeline.Workspace)/app.zip'
+        RuntimeStack: 'PYTHON|3.11'
+        StartupCommand: 'python -m quart run --port=$PORT'
+
+
