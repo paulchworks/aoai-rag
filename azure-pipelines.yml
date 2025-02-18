@@ -20,7 +20,7 @@ stages:
         pip install -r requirements.txt
         cd frontend
         npm install
-        npm build
+        npm run build
       displayName: 'Install Dependencies'
 
     - script: ls -R .
