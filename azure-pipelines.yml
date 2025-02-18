@@ -14,8 +14,15 @@ stages:
     - script: echo Building the application...
       displayName: 'Start Build Process'
 
+    # Use the "UsePythonVersion" task to specify Python 3.11
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '3.11'
+        addToPath: true
+      displayName: 'Set up Python 3.11'
+
     - script: |
-        python3 -m venv .venv
+        python3.11 -m venv .venv
         source .venv/bin/activate
         pip install -r requirements.txt
         cd frontend
