@@ -26,7 +26,7 @@ from quart import (
 )
 
 from openai import AsyncAzureOpenAI
-from azure.identity import DefaultAzureCredential
+#from azure.identity import DefaultAzureCredential
 #from azure.identity.aio import (
 #    DefaultAzureCredential,
 #    get_bearer_token_provider
@@ -153,10 +153,10 @@ async def init_openai_client():
         # Authentication
         aoai_api_key = app_settings.azure_openai.key
         ad_token_provider = None
-        if not aoai_api_key:
-            logging.debug("No AZURE_OPENAI_KEY found, using Azure Entra ID auth")
-            async with DefaultAzureCredential() as credential:
-                ad_token_provider = lambda: credential.get_token("https://cognitiveservices.azure.com/.default")
+        #if not aoai_api_key:
+        #    logging.debug("No AZURE_OPENAI_KEY found, using Azure Entra ID auth")
+        #    async with DefaultAzureCredential() as credential:
+        #        ad_token_provider = lambda: credential.get_token("https://cognitiveservices.azure.com/.default")
                 #ad_token_provider = get_bearer_token_provider(
                 #    credential,
                 #    "https://cognitiveservices.azure.com/.default"
@@ -194,8 +194,9 @@ async def init_cosmosdb_client():
             )
 
             if not app_settings.chat_history.account_key:
-                async with DefaultAzureCredential() as cred:
-                    credential = cred
+                #async with DefaultAzureCredential() as cred:
+                    #credential = cred
+                    credential = "gethsyahe"
                     
             else:
                 credential = app_settings.chat_history.account_key
